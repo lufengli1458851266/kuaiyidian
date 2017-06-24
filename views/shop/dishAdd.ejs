@@ -1,11 +1,10 @@
-<script>
+00<script>
   function onAddDish(){
     var formData = new FormData();
     formData.append("dishphoto", document.getElementById("dishphoto").files[0]);
-    alert('0');
-    formData.append('dishname',dishForm.dishname.value);alert('1');
-    formData.append('price',dishForm.price.value);alert('2');
-    formData.append('menuid',dishForm.menuid.value);alert('3');
+    formData.append('dishname',dishForm.dishname.value);
+    formData.append('price',dishForm.price.value);
+    formData.append('menuid',dishForm.menuid.value);
     // $.post('./addDish',formData,function(data){
     //   alert('返回:'+data);
     // });
@@ -24,7 +23,13 @@
                   */
                   processData: false,
                   success: function (data) {
-                      alert('收到:'+data);
+                      if(data==0){
+                        typeid=dishForm.menuid.value;
+                        $('#t'+typeid+' td').load('./dishes?id='+typeid);
+                        num = $('#n'+typeid).text();
+                        $('#n'+typeid).text(parseInt(num)+1);//
+                        $('#dishModal').modal('hide');
+                      }
                   },
                   error: function () {
                       alert("上传失败！");
@@ -66,7 +71,7 @@
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
               <input type='hidden' name='menuid'/>
-              <button type="submit" class="btn btn-default">创建</button>
+              <input type="submit" name='formBtn' class="btn btn-default" value='创建'/>
             </div>
           </div>
         </form>

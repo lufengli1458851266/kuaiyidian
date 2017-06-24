@@ -1,4 +1,19 @@
-<input type="button" class="btn btn-primary" value='创建菜品' data-toggle="modal" data-target="#dishModal" />
+<script>
+function addDish(){
+	dishForm.reset();
+	dishForm.formBtn.value='创建';
+	 $('#dishModal').modal('show');
+}
+function updDish(thisa,dishId){
+	tds=$(thisa).parent().parent().children();
+	dishForm.dishname.value=tds[1].innerText;
+	dishForm.price.value = tds[2].innerText;
+	dishForm.formBtn.value='修改';
+    $('#dishModal').modal('show');
+  }
+</script>
+
+<input type="button" class="btn btn-primary" value='创建菜品' onclick='addDish()'/>
 
 <table class="table table-hover" align="center">
   <thead>
@@ -31,7 +46,7 @@
       </td>
       <td>
         <a href='#'>下架</a>&nbsp;
-        <a href='#'>修改</a>&nbsp;
+        <a href='#' onclick='updDish(this,<%-item.id%>)'>修改</a>&nbsp;
         <a href='#'>删除</a>
       </td>
     </tr>

@@ -42,7 +42,7 @@ router.use('/users', users.routes(), users.allowedMethods());
 router.use('/admin', admin.routes(), admin.allowedMethods());
 router.use('/shop', shop.routes(), shop.allowedMethods());
 
-var openPage = ['/','/admin/login','/shop/login'];
+var openPage = ['/','/admin/login','/shop/login','/shop/mobileLogin'];
 app.use(async (ctx, next) => { 
     var url = ctx.originalUrl;
     console.log('url='+url);

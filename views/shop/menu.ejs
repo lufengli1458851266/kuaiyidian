@@ -14,7 +14,6 @@
   function dishes(typeid){
     $('#t'+typeid).toggle(function(){
       if(this.style.display==''){
-        alert('去查');
         dishForm.menuid.value=typeid;
         $('#t'+typeid+' td').load('./dishes?id='+typeid);
       }
@@ -22,6 +21,8 @@
     });
     
   }
+
+  
 
   function onAddClerk(){
     return true;
@@ -47,14 +48,14 @@
     <% rs.forEach(function(item){ %>
     <tr>
       <td><%-item.typename%></td>
-      <td><a href='#' onclick='dishes(<%-item.id%>)'>有<b style='color:red'><%-item.num%></b>种菜品</a></td>
+      <td><a href='#' onclick='dishes(<%-item.id%>)'>有<b id='n<%-item.id%>' style='color:red'><%-item.num%></b>种菜品</a></td>
       <td>
         <a href='#'>修改</a>&nbsp;
         <a href='#'>删除</a>
       </td>
     </tr>
     <tr id='t<%-item.id%>' style='display:none'>
-      <td colspan="3" align="center">aaaaaaaaaa</td>
+      <td colspan="3" align="center"></td>
     </tr>
     <% }) %>
   </tbody>

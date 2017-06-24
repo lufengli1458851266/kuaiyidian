@@ -41,6 +41,26 @@ router.post('/login', async function (ctx, next) {
 	  // });
 })
 
+router.post('/mobileLogin', async function (ctx, next) {
+  	  let rs = await ShopUserModel.findOne({where:{email:ctx.request.body.email,pwd:ctx.request.body.pwd}});
+  	  if(rs){
+  	  	  let loginbean = new Object();
+		  loginbean.id = rs.id;
+		  loginbean.nicheng = rs.nicheng;
+		  loginbean.shoprole = rs.role;
+		  loginbean.shopid = rs.shopid;
+		  ctx.session.loginbean=loginbean;
+		  ctx.body=1;
+		  //ctx.redirect('./');
+  	  }else{
+  	  	  ctx.body=0;
+  	  }
+	  
+			
+	  // await ctx.render('index', {
+	  // });
+})
+
 router.post('/addClerk', async function (ctx, next) {
 	let loginbean = ctx.session.loginbean;
   	if((typeof(loginbean.shoprole)!='undefined')&&loginbean.shoprole==0){
